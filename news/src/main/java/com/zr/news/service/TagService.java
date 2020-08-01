@@ -4,6 +4,8 @@ import com.zr.news.po.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface TagService {
 
     Page<Tag> listTag(Pageable pageable);
@@ -17,5 +19,11 @@ public interface TagService {
     Tag getTag(Long id);
 
     Tag updateTag(Long id,Tag tag);
+
+    List<Tag> listTag();
+
+    List<Tag> listTag(String ids);
+
+
 
 }

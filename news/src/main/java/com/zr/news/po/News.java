@@ -1,7 +1,9 @@
 package com.zr.news.po;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "t_news")
@@ -33,8 +35,18 @@ public class News {
     @ManyToOne
     private User user;
 
+    @ManyToMany(cascade = CascadeType.PERSIST) //级联
+    private List<Tag> tags = new ArrayList<>();
+
+    @Transient
+    private String tagIds;
+
+    private String description;
+
     public News() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -156,6 +168,73 @@ public class News {
         this.user = user;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "News{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", content='" + content + '\'' +
+//                ", firstPicture='" + firstPicture + '\'' +
+//                ", flag='" + flag + '\'' +
+//                ", views='" + views + '\'' +
+//                ", appreciation=" + appreciation +
+//                ", shareStatement=" + shareStatement +
+//                ", commentabled=" + commentabled +
+//                ", published=" + published +
+//                ", recommend=" + recommend +
+//                ", createTime=" + createTime +
+//                ", updateTime=" + updateTime +
+//                ", type=" + type +
+//                ", user=" + user +
+//                '}';
+
+    public void init(){
+        this.tagIds = tagsToIds(this.getTags());
+    }
+
+    //1,2,3
+    private String tagsToIds(List<Tag> tags){
+        if(!tags.isEmpty()){
+            StringBuffer ids = new StringBuffer();
+            boolean flag = false;
+            for (Tag tag:tags){
+                if(flag){
+                    ids.append(",");
+                }else{
+                    flag=true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        }else{
+            return tagIds;//看不懂这一句
+        }
+    }
+
     @Override
     public String toString() {
         return "News{" +
@@ -174,6 +253,10 @@ public class News {
                 ", updateTime=" + updateTime +
                 ", type=" + type +
                 ", user=" + user +
+                ", tags=" + tags +
+                ", tagIds='" + tagIds + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
+

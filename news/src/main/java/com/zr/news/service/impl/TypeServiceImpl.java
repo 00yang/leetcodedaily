@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TypeServiceImpl implements TypeService {
 
@@ -48,6 +50,11 @@ public class TypeServiceImpl implements TypeService {
         }
         BeanUtils.copyProperties(type,type1);
         return typeRepository.save(type1);
+    }
+
+    @Override
+    public List<Type> listType() {
+        return typeRepository.findAll();
     }
 
 

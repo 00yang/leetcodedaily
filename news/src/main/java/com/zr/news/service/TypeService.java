@@ -4,6 +4,8 @@ import com.zr.news.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface TypeService {
 
     Page<Type> listType(Pageable pageable);
@@ -17,4 +19,6 @@ public interface TypeService {
     Type getType(Long id);
 
     Type updateType(Long id,Type type);
+
+    List<Type> listType();
 }
