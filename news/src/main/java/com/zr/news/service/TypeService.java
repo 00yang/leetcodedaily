@@ -8,4 +8,13 @@ public interface TypeService {
 
     Page<Type> listType(Pageable pageable);
 
+    Type savaType(Type type);
+
+    Type getTypeByName(String name);
+
+    void delete(Long id);
+
+    Type getType(Long id);
+
+    Type updateType(Long id,Type type);
 }
