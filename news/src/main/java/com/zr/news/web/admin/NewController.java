@@ -102,6 +102,13 @@ public class NewController {
 
     }
 
+    @GetMapping("/news/{id}/delete")
+    public String delete(@PathVariable Long id,RedirectAttributes attributes){
+        newService.deleteNew(id);
+        attributes.addFlashAttribute("message","删除成功");
+        return REDIRECT_LIST;
+    }
+
 }
 
 
