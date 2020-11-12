@@ -38,4 +38,22 @@ public class Lc922 {
         return A;
 
     }
+
+    //简化
+    public int[] sortArrayByParityII1(int[] A) {
+        int l = A.length-1;
+        int j = 0;
+        int i = 1;
+        for(;j<=l-1;j+=2){
+            if((A[j]&1)==1){
+                while((A[i]&1)==1){
+                    i+=2;
+                }
+                int temp = A[i];
+                A[i] = A[j];
+                A[j] = temp;
+            }
+        }
+        return A;
+    }
 }
